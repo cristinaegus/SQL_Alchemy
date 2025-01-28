@@ -9,7 +9,7 @@ db_management_sys = "postgresql"
 db_name = "postgres"
 db_user = "postgres"
 # Esto puede variar según la configuración de tu proveedor
-db_password = "BZrd4cGYyHZMax7n"
+db_password = "Qzd0MtdWrULeulfQ"
 db_host = "heinously-engrossed-sabertooth.data-1.use1.tembo.io"
 
 
