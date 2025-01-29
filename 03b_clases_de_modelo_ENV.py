@@ -74,7 +74,7 @@ imprime_todo(Tabla_Personas)
 
 # Naturalmente, el objetivo es realizar consultas filtradas para acceder sólo a los datos deseados
 # En este caso seleccionamos un elemento que vamos a eliminar después.
-eliminable = session.query(Tabla_Personas).filter(Tabla_Personas.dni == "87622225H").first()
+eliminable = session.query(Tabla_Personas).filter(Tabla_Personas.dni == "87622228H").first()
 print(eliminable.dni)
 
 # La función delete elimina los elementos de la base de datos

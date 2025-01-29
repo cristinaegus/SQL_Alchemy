@@ -1,24 +1,15 @@
 from sqlalchemy import create_engine, MetaData
 from sqlalchemy.orm import sessionmaker, declarative_base
 
-
 # URL de conexión a la base de datos SQLite (puedes cambiarlo a tu configuración PostgreSQL)
 db_url = 'sqlite:///ejemplo.db'
 
-# Información de la base de datos
-# Información de la base de datos
-db_management_sys = "postgresql"
-db_name = "postgres"
-db_user = "postgres"
-# Esto puede variar según la configuración de tu proveedor
-db_password = "Qzd0MtdWrULeulfQ"
-db_host = "heinously-engrossed-sabertooth.data-1.use1.tembo.io"
-
-# URL de conexión a la base de datos PostgreSQL en ElephantSQL
-db_url = f"{db_management_sys}://{db_user}:{db_password}@{db_host}/{db_name}"
+import environ
+env = environ.Env()
+env.read_env(".env")
 
 # Crear una instancia de motor (engine)
-engine = create_engine(db_url)
+engine = create_engine(env("db_url_remota"))
 
 # Crear una instancia de MetaData
 metadata = MetaData()

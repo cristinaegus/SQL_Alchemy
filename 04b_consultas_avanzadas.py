@@ -1,8 +1,11 @@
-from sqlalchemy import create_engine, Column, Integer, String, ForeignKey, Table, MetaData
-from sqlalchemy.orm import declarative_base, relationship, Session
+from sqlalchemy import create_engine, Column, Integer, String, MetaData
+from sqlalchemy.orm import declarative_base, Session
+
+###########################################################
+# Uso de operadores de comparación en consultas avanzadas
+###########################################################
 
 # Crear el motor y la sesión
-
 import environ
 env = environ.Env()
 env.read_env(".env")
@@ -22,7 +25,8 @@ class Producto(Base):
     precio = Column(Integer)
     stock = Column(Integer)
 
-Base.metadata.create_all(engine)
+# Crear la tabla en la base de datos
+metadata.create_all(engine)
 
 # Crear algunos registros de productos
 producto1 = Producto(nombre='Laptop', precio=1000, stock=5)
@@ -35,7 +39,6 @@ session.commit()
 session.query(Producto).all()
 
 
-# Uso de operadores de comparación en consultas avanzadas
 # Ejemplo 1: Productos con un precio mayor a 500
 resultados_precio_mayor_400 = session.query(Producto).filter(Producto.precio > 500 ).all()
 

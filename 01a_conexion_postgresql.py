@@ -4,6 +4,10 @@ creada en elephantsql.com
 """
 from sqlalchemy import create_engine
 
+# URL de conexión a la base de datos PostgreSQL en Tembo.io
+db_url = "postgresql://postgres:Qzd0MtdWrULeulfQ@heinously-engrossed-sabertooth.data-1.use1.tembo.io:5432/postgres"
+
+# Podemos generar la URL de conexión utilizando variables
 # Información de la base de datos
 db_management_sys = "postgresql"
 db_name = "postgres"
@@ -12,10 +16,8 @@ db_user = "postgres"
 db_password = "Qzd0MtdWrULeulfQ"
 db_host = "heinously-engrossed-sabertooth.data-1.use1.tembo.io"
 
-# URL de conexión a la base de datos PostgreSQL en ElephantSQL
+# URL de conexión a la base de datos PostgreSQL en Tembo.io
 db_url = f"{db_management_sys}://{db_user}:{db_password}@{db_host}/{db_name}"
-
-db_url = "postgresql://postgres:Qzd0MtdWrULeulfQ@heinously-engrossed-sabertooth.data-1.use1.tembo.io:5432/postgres"
 
 # Crear una instancia de motor (engine)
 engine = create_engine(db_url)
