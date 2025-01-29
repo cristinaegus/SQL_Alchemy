@@ -3,17 +3,12 @@ from sqlalchemy.orm import declarative_base, relationship, Session
 
 # Crear el motor y la sesión
 
-# Información de la base de datos
-db_management_sys = "postgresql"
-db_name = "mmhfmmvy"
-db_user = "mmhfmmvy"
-db_password = "ovFJxGQWFdC2uXoZ6zvd0PZWajjZOFCW"
-db_host = "arjuna.db.elephantsql.com"  # Esto puede variar según la configuración de tu proveedor
+import environ
+env = environ.Env()
+env.read_env(".env")
 
-# URL de conexión a la base de datos PostgreSQL en ElephantSQL
-db_url = f"{db_management_sys}://{db_user}:{db_password}@{db_host}/{db_name}"
-
-engine = create_engine(db_url, echo=True)
+# Crear una instancia de motor (engine)
+engine = create_engine(env("db_url_remota"), echo=True)
 metadata = MetaData()
 Base = declarative_base(metadata = metadata)
 session = Session(engine)
@@ -42,7 +37,7 @@ session.query(Producto).all()
 
 # Uso de operadores de comparación en consultas avanzadas
 # Ejemplo 1: Productos con un precio mayor a 500
-resultados_precio_mayor_400 = session.query(Producto).filter(Producto.precio == None ).all()
+resultados_precio_mayor_400 = session.query(Producto).filter(Producto.precio > 500 ).all()
 
 
 print("\nProductos con precio mayor a 400:")

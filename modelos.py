@@ -15,7 +15,7 @@ metadata = MetaData()
 Base = declarative_base(metadata=metadata)
 
 class Tabla_Personas(Base):
-    __tablename__ = 'tabla_personas'
+    __tablename__ = 'tabla_personas2'
 
     id = Column(Integer, primary_key=True, autoincrement=True)
     nombre = Column(String(30), nullable=False)

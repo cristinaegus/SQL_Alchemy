@@ -2,19 +2,21 @@ from sqlalchemy import create_engine
 
 # Información de la base de datos
 db_management_sys = "postgresql"
-db_name = "mmhfmmvy"
-db_user = "mmhfmmvy"
-db_password = "ovFJxGQWFdC2uXoZ6zvd0PZWajjZOFCW"
-db_host = "arjuna.db.elephantsql.com"  # Esto puede variar según la configuración de tu proveedor
+db_name = "postgres"
+db_user = "postgres"
+# Esto puede variar según la configuración de tu proveedor
+db_password = "Qzd0MtdWrULeulfQ"
+db_host = "heinously-engrossed-sabertooth.data-1.use1.tembo.io"
 
-# URL de conexión a la base de datos PostgreSQL en ElephantSQL
+# URL de conexión a la base de datos PostgreSQL en Tembo.io
 db_url = f"{db_management_sys}://{db_user}:{db_password}@{db_host}/{db_name}"
+
 #db_url = 'sqlite:///ejemplo.db'
 # Crear una instancia de motor (engine)
-engine = create_engine(db_url)
+# engine = create_engine(db_url)
 
 # Si se quiere usar SQLite en lugar de la base remota:
-# engine = create_engine('sqlite:///ejemplo.db')
+engine = create_engine('sqlite:///ejemplo.db')
 
 
 # Vamos a subir un DataFrame de Pandas a la Base de datos

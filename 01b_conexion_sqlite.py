@@ -26,4 +26,5 @@ except Exception as e:
 finally:
     # Cerrar la conexión cuando hayas terminado
     if connection:
+        print("Cerrando la conexión")
         connection.close()

@@ -42,11 +42,11 @@ session = Session()
 # Nota: Si lo ejecuto dos veces la creación del mismo registro 
 # da error porque dni ha de ser único
 
-nuevo_registro = Tabla_Personas(nombre='Juan', apellido1='López', dni='12345678F')
+nuevo_registro = Tabla_Personas(nombre='Luis', apellido1='Sánchez', dni='34254537H')
 session.add(nuevo_registro)
 session.commit()
 
-nuevo_registro = Tabla_Personas(nombre='Pedro', apellido1='García', dni='87622222A')
+nuevo_registro = Tabla_Personas(nombre='Juan', apellido1='Gómez', dni='87622228H')
 session.add(nuevo_registro)
 
 # Ninguno de los cambios que estamos asociando a la sesión se realiza efectivamente 
@@ -74,7 +74,7 @@ imprime_todo(Tabla_Personas)
 
 # Naturalmente, el objetivo es realizar consultas filtradas para acceder sólo a los datos deseados
 # En este caso seleccionamos un elemento que vamos a eliminar después.
-eliminable = session.query(Tabla_Personas).filter(Tabla_Personas.dni == "87622222A").first()
+eliminable = session.query(Tabla_Personas).filter(Tabla_Personas.dni == "87622225H").first()
 print(eliminable.dni)
 
 # La función delete elimina los elementos de la base de datos

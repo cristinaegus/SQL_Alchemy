@@ -12,9 +12,10 @@ db_user = "postgres"
 db_password = "Qzd0MtdWrULeulfQ"
 db_host = "heinously-engrossed-sabertooth.data-1.use1.tembo.io"
 
-
 # URL de conexión a la base de datos PostgreSQL en ElephantSQL
 db_url = f"{db_management_sys}://{db_user}:{db_password}@{db_host}/{db_name}"
+
+db_url = "postgresql://postgres:Qzd0MtdWrULeulfQ@heinously-engrossed-sabertooth.data-1.use1.tembo.io:5432/postgres"
 
 # Crear una instancia de motor (engine)
 engine = create_engine(db_url)
