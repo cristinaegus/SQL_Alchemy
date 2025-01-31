@@ -37,7 +37,6 @@ for registro in registros:
     print(registro.id, registro.nombre, registro.apellido1, registro.dni, registro.date_created)
 
 # Consulta: Filtrar por el valor de un campo
-
     # Con filter
 filtro_nombre = session.query(Tabla_Personas).filter(Tabla_Personas.nombre=='Ejemplo').first()
 print("\nRegistro con nombre 'Ejemplo':", filtro_nombre.id, filtro_nombre.nombre, filtro_nombre.apellido1, filtro_nombre.dni, filtro_nombre.date_created)
@@ -54,7 +53,7 @@ session.commit()
 
 # Consulta: Verificar la actualización
 registro_actualizado = session.query(Tabla_Personas).filter_by(nombre='NuevoNombre').first()
-print("\nRegistro con nombre 'Ejemplo':", registro_actualizado.id, registro_actualizado.nombre, registro_actualizado.apellido1, registro_actualizado.dni, registro_actualizado.date_created)
+print("\nRegistro con nombre 'NuevoNombre':", registro_actualizado.id, registro_actualizado.nombre, registro_actualizado.apellido1, registro_actualizado.dni, registro_actualizado.date_created)
 
 # Eliminar un registro
 registro_a_eliminar = session.query(Tabla_Personas).filter_by(nombre='NuevoNombre').first()
