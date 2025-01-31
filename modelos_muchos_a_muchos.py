@@ -38,7 +38,7 @@ class Estudiante(Base):
 
     # Definir relación uno a muchos con la tabla Inscripciones
     # Se usa back_populates para establecer la relación bidireccional con la clase Inscripcion.
-    inscripciones = relationship("inscripciones", back_populates="estudiantes")
+    inscripciones = relationship("Inscripcion", back_populates="estudiantes")
 
 class Curso(Base):
     __tablename__ = 'cursos'
@@ -48,7 +48,7 @@ class Curso(Base):
 
     # Definir relación uno a muchos con la tabla Inscripciones
     # Se usa back_populates para establecer la relación bidireccional con la clase Inscripcion.
-    inscripciones = relationship("inscripciones", back_populates="cursos")
+    inscripciones = relationship("Inscripcion", back_populates="cursos")
 
 class Inscripcion(Base):
     __tablename__ = 'inscripciones'

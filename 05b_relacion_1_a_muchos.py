@@ -15,7 +15,7 @@ env = environ.Env()
 env.read_env(".env")
 
 # Crear una instancia de motor (engine)
-engine = create_engine(env("db_url_local"))
+engine = create_engine(env("db_url_remota"))
 
 ################################
 # Creación del modelo de datos #

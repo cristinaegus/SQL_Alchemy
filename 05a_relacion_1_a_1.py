@@ -12,7 +12,7 @@ from modelos_1_a_1 import Personas, Direcciones
 import environ
 env = environ.Env()
 
-engine = create_engine(env("db_url_local"))
+engine = create_engine(env("db_url_remota"))
 ################################
 # Creación del modelo de datos #
 ################################
@@ -28,24 +28,25 @@ session = Session()
 # Las dos tablas están vacías
 personas = session.query(Personas).all()
 direcciones = session.query(Direcciones).all()
-print("Presonas:", personas)
+print("Personas:", personas)
 print("Direcciones:", direcciones)
 # *** AÑADIR DATOS AQUÍ ***
+nueva_persona_1 = Personas(nombre='Juan', apellido1='López', apellido2='Pérez', dni='87654321A')
+nueva_persona_2 = Personas(nombre='Pedro', apellido1='García', apellido2='Sánchez', dni='12345678B')
+nueva_persona_3 = Personas(nombre='Luis', apellido1='Martínez', apellido2='Martín', dni='10001000C')
+nueva_persona_4 = Personas(nombre='Diógenes', apellido1='Vagabundo', apellido2='Sintecho', dni='13131313D')
+session.add(nueva_persona_1)
+session.add(nueva_persona_2)
+session.add(nueva_persona_3)
+session.add(nueva_persona_4)
 try:
-    nueva_persona_1 = Personas(nombre='Juan', apellido1='López', apellido2='Pérez', dni='87654321A')
-    nueva_persona_2 = Personas(nombre='Pedro', apellido1='García', apellido2='Sánchez', dni='12345678B')
-    nueva_persona_3 = Personas(nombre='Luis', apellido1='Martínez', apellido2='Martín', dni='10001000C')
-    nueva_persona_4 = Personas(nombre='Diógenes', apellido1='Vagabundo', apellido2='Sintecho', dni='13131313D')
-    session.add(nueva_persona_1)
-    session.add(nueva_persona_2)
-    session.add(nueva_persona_3)
-    session.add(nueva_persona_4)
     session.commit()
     print("Datos añadidos correctamente.")
 
 except Exception as e:
     session.rollback()  # En caso de error, revierte los cambios
     print(f"Error al añadir datos de personas: {e}")
+
 # Comprobamos lo añadido
 for persona in session.query(Personas).all():
     print(persona.id, persona.dni)
@@ -69,12 +70,12 @@ except Exception as e:
 # Comprobamos lo añadido
 for direccion in session.query(Direcciones).all():
     print(direccion.id, direccion.calle, direccion.numero, direccion.ciudad, direccion.persona_id) # Guarda los cambios en la base de datos
-
+    print(direccion)
 
 # *** AHORA puedes consultar las tablas ***
 personas = session.query(Personas).all()
 direcciones = session.query(Direcciones).all()
-print("Presonas:", personas)
+print("Pesonas:", personas)
 print("Direcciones:", direcciones)
 
 # Vemos que al obtener los datos de las personas tengo acceso a las tablas relacionadas

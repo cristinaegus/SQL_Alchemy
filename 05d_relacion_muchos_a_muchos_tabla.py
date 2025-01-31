@@ -15,7 +15,7 @@ env = environ.Env()
 env.read_env(".env")
 
 # Crear una instancia de motor (engine)
-engine = create_engine(env("db_url_local"))
+engine = create_engine(env("db_url_remota"))
 
 ################################
 # Creación del modelo de datos #
@@ -81,7 +81,7 @@ for materia in materias:
     else:
         print("No hay alumnos asociados")
     
-materias[0].alumnos[0].nombre
+materias[1].alumnos[1].nombre
 
 # Lo mismo ocurre desde alumnos a materias
 alumnos = session.query(Alumno).all()

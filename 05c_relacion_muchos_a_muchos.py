@@ -33,7 +33,6 @@ estudiante1 = Estudiante(nombre='Estudiante1')
 estudiante2 = Estudiante(nombre='Estudiante2')
 estudiante3 = Estudiante(nombre='Estudiante3')
 
-
 curso1 = Curso(nombre='Curso1')
 curso2 = Curso(nombre='Curso2')
 curso3 = Curso(nombre='Curso3')

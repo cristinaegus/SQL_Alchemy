@@ -35,7 +35,7 @@ class Alumno(Base):
     nombre = Column(String)
 
     # Definir relación muchos a muchos con la tabla Materias
-    materias = relationship("materias", secondary=asociacion_alumnos_materias, back_populates="alumnos")
+    materias = relationship("Materia", secondary=asociacion_alumnos_materias, back_populates="alumnos")
 
 
 class Materia(Base):
@@ -45,5 +45,5 @@ class Materia(Base):
     nombre = Column(String)
 
     # Definir relación muchos a muchos con la tabla Alumnos
-    alumnos = relationship("alumnos", secondary=asociacion_alumnos_materias, back_populates="materias")
+    alumnos = relationship("Alumno", secondary=asociacion_alumnos_materias, back_populates="materias")
 
