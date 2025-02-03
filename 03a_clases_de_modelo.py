@@ -1,6 +1,7 @@
 from sqlalchemy import create_engine, MetaData
 from sqlalchemy import Column
 from sqlalchemy import Integer, String, DateTime
+from sqlalchemy import event
 
 # orm significa object relational mapping
 from sqlalchemy.orm import declarative_base
@@ -28,7 +29,7 @@ db_url_local = 'sqlite:///ejemplo.db'
 
 # Crear una instancia de motor (engine)
 # Cambiar db_url por db_url_local para usar cualquiera de las bases de datos
-engine = create_engine(db_url)
+engine = create_engine(db_url_local)
 
 ################################
 # Creación del modelo de datos #
@@ -48,12 +49,21 @@ Base = declarative_base(metadata = metadata)
 class Tabla_Personas(Base):
     __tablename__ = 'tabla_personas'
 
-    id = Column(Integer, primary_key=True, autoincrement=True)
+    id = Column(Integer, primary_key=True, autoincrement=True, )
     nombre = Column(String(30), nullable=False)
     apellido1 = Column(String(30), nullable=False)
     apellido2 = Column(String(30), nullable=True)
     dni = Column(String(9), nullable=False, unique=True)
     date_created = Column(DateTime(), default = datetime.now(timezone.utc))
+
+# OPCIONAL. Que la fecha de creación se actualice en el momento de insertar
+# Definimos una función que se ejecutará antes de insertar un nuevo registro
+def set_date_created(mapper, connection, target):
+    if target.date_created is None:
+        target.date_created = datetime.now(timezone.utc)
+
+# Registramos el evento before_insert para la clase Tabla_Personas
+event.listen(Tabla_Personas, 'before_insert', set_date_created)
 
 # La tabla vacía que hemos creado queda guardada en `metadata`
 print(metadata.tables)
@@ -70,6 +80,16 @@ session = Session()
 # Nota: Si lo ejecuto dos veces la creación del mismo registro 
 # da error porque dni ha de ser único
 nuevo_registro = Tabla_Personas(nombre='Juan', apellido1='López', dni='12345678F')
+# Puedo ver el contenido del registro.
+# El id no está definido hasta que se añade a la base de datos
+nuevo_registro.id
+# Tampoco date_created
+nuevo_registro.date_created
+nuevo_registro.nombre
+nuevo_registro.apellido1
+nuevo_registro.apellido2
+nuevo_registro.dni
+# El registro no se ha añadido a la base de datos hasta que se hace el commit
 session.add(nuevo_registro)
 session.commit()
 
@@ -83,6 +103,8 @@ session.commit()
 # Ejemplo de cómo consultar todos los registros de la base de datos
 
 registros = session.query(Tabla_Personas).all()
+registros[0].apellido1
+
 
 def imprime_todo(Clase_Modelo):
     """

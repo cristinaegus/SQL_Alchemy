@@ -40,10 +40,11 @@ for registro in registros:
     # Con filter
 filtro_nombre = session.query(Tabla_Personas).filter(Tabla_Personas.nombre=='Ejemplo').first()
 print("\nRegistro con nombre 'Ejemplo':", filtro_nombre.id, filtro_nombre.nombre, filtro_nombre.apellido1, filtro_nombre.dni, filtro_nombre.date_created)
-
+session.commit()
     # Con filter_by
 filtro_nombre = session.query(Tabla_Personas).filter_by(nombre='Ejemplo').first()
 print("\nRegistro con nombre 'Ejemplo':", filtro_nombre.id, filtro_nombre.nombre, filtro_nombre.apellido1, filtro_nombre.dni, filtro_nombre.date_created)
+
 
 
 # Actualizar un registro

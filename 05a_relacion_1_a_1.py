@@ -12,7 +12,7 @@ from modelos_1_a_1 import Personas, Direcciones
 import environ
 env = environ.Env()
 
-engine = create_engine(env("db_url_remota"))
+engine = create_engine("postgresql://postgres:gADN0XF1bH27yOfc@fussily-touching-troll.data-1.use1.tembo.io:5432/postgres")
 ################################
 # Creación del modelo de datos #
 ################################
@@ -75,7 +75,7 @@ for direccion in session.query(Direcciones).all():
 # *** AHORA puedes consultar las tablas ***
 personas = session.query(Personas).all()
 direcciones = session.query(Direcciones).all()
-print("Pesonas:", personas)
+print("Personas:", personas)
 print("Direcciones:", direcciones)
 
 # Vemos que al obtener los datos de las personas tengo acceso a las tablas relacionadas
@@ -93,7 +93,7 @@ print("%%%%%%%%%%%%%%%%%%")
 
 # Lo mismo ocurre al acceder a las direcciones. Tengo acceso a las personas
 direcciones = session.query(Direcciones).all()
-for direccion in direcciones[:]:
+for direccion in direcciones:
     print(f"Vivienda en la calle: {direccion.calle}, Número: {direccion.numero}, de la ciudad de {direccion.ciudad}, ID de la persona que vive ahí {direccion.persona_id}")  
     if direccion.persona:
         print(f"En esta vivienda vive {direccion.persona.nombre} {direccion.persona.apellido1} con DNI {direccion.persona.dni}")

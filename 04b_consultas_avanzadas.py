@@ -40,17 +40,17 @@ session.commit()
 session.query(Producto).all()
 
 
-# Ejemplo 1: Productos con un precio mayor a 500
-resultados_precio_mayor_500 = session.query(Producto).filter(Producto.precio > 400 ).all()
+# Ejemplo 1: Productos con un precio mayor a 400
+resultados_precio_mayor_400 = session.query(Producto).filter(Producto.precio > 400 ).all()
 
 
-print("\nProductos con precio mayor a 500:")
-for producto in resultados_precio_mayor_500:
+print("\nProductos con precio mayor a 400:")
+for producto in resultados_precio_mayor_400:
     print(f"ID: {producto.id}, Nombre: {producto.nombre}, Precio: {producto.precio}")
 
 
 # Ejemplo 2: Productos con stock menor o igual a 5
-resultados_stock_menor_igual_5 = session.query(Producto).filter(Producto.stock <= 9).all()
+resultados_stock_menor_igual_5 = session.query(Producto).filter(Producto.stock <= 5)
 
 print("\\nProductos con stock menor o igual a 5:")
 for producto in resultados_stock_menor_igual_5:
