@@ -2,10 +2,11 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
-from videoclub.modelos_videoclub import *
-db_password = "NWovAdtDkHWbZPbOecGcKkzIPcLmZIPB"
-db_host = "viaduct.proxy.rlwy.net"
-port = 31140
+from modelos_videoclub import *
+
+db_password = "RwwhayPprzNVYYJxwTSNtVknVnblShcd"
+db_host = "monorail.proxy.rlwy.net"
+port = 31933
 db_url = f"mysql+pymysql://root:{db_password}@{db_host}:{port}/railway"
 
 # Crear una instancia de motor (engine)
@@ -21,7 +22,7 @@ try:
     print(len(prestamos))
     for prestamo in prestamos:
         print("Datos Prestamo:", prestamo.prestamo_id, prestamo.fecha_prestamo, prestamo.fecha_devolucion)
-        print("Datos Cliente:", prestamo.cliente_rel.nombre)
+        print("Datos Cliente:", prestamo.cliente_rel.nombre, prestamo.cliente_rel.apellidos, prestamo.cliente_rel.telefono)
         print("Datos Copia:", prestamo.copia_rel.pelicula_rel.titulo)
     # Obtener todos los elementos de la tabla 
 except Exception as e:
