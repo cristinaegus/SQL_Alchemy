@@ -4,7 +4,6 @@ from sqlalchemy.orm import sessionmaker
 
 """
 Reescribimos el código del archivo 03a_clases_de_modelo.py con las siguientes mejoras
-- Inclusión de los datos de entrada a la base de datos desde un archivo de entorno `.env`
 - Inclusión de las clases de modelo desde otro archivo.
 """
 
@@ -14,9 +13,12 @@ Reescribimos el código del archivo 03a_clases_de_modelo.py con las siguientes m
 import environ
 env = environ.Env()
 env.read_env(".env")
+db_url = env("db_url")
+# Si se quiere usar SQLite en lugar de la base remota:
+db_url = 'sqlite:///ejemplo.db'
 
 # Crear una instancia de motor (engine)
-engine = create_engine(env("db_url_remota"))
+engine = create_engine(db_url)
 
 ################################
 # Creación del modelo de datos #

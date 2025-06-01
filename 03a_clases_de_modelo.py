@@ -13,23 +13,19 @@ from datetime import datetime, timezone
 # Configuración de la base de datos #
 #####################################
 
-# Información de la base de datos
-db_management_sys = "postgresql"
-db_name = "postgres"
-db_user = "postgres"
-# Esto puede variar según la configuración de tu proveedor
-db_password = "Qzd0MtdWrULeulfQ"
-db_host = "heinously-engrossed-sabertooth.data-1.use1.tembo.io"
+# URL de conexión a la base de datos PostgreSQL en el archivo .env
+import environ
+env = environ.Env()
+env.read_env(".env")
+db_url = env("db_url")
+print("Comprobamos que ha tomado el valor de la variable de entorno:", db_url)
 
-# URL de conexión a la base de datos PostgreSQL en Tembo.io
-db_url = f"{db_management_sys}://{db_user}:{db_password}@{db_host}/{db_name}"
-
-# URL de conexión a la base de datos SQLite en el archivo ejemplo.db
-db_url_local = 'sqlite:///ejemplo.db'
+# Si se quiere usar SQLite en lugar de la base remota:
+db_url = 'sqlite:///ejemplo.db'
 
 # Crear una instancia de motor (engine)
 # Cambiar db_url por db_url_local para usar cualquiera de las bases de datos
-engine = create_engine(db_url_local)
+engine = create_engine(db_url)
 
 ################################
 # Creación del modelo de datos #
@@ -40,6 +36,7 @@ engine = create_engine(db_url_local)
     simplifica la definición de modelos de datos.
 """
 # Crear una instancia de MetaData
+# en metadata se va a ir creando la estructura de la base de datos
 metadata = MetaData()
 
 # Crear la clase de modelo utilizando Declarative Base
@@ -65,8 +62,21 @@ def set_date_created(mapper, connection, target):
 # Registramos el evento before_insert para la clase Tabla_Personas
 event.listen(Tabla_Personas, 'before_insert', set_date_created)
 
+"""
+# Otra sintaxis, con un decorador
+@event.listens_for(Tabla_Personas, 'before_insert')
+def set_date_created(mapper, connection, target):
+    if target.date_created is None:
+        target.date_created = datetime.now(timezone.utc)
+# Esto es equivalente a la función anterior.
+"""
+
 # La tabla vacía que hemos creado queda guardada en `metadata`
 print(metadata.tables)
+metadata.tables['tabla_personas']
+metadata.tables['tabla_personas'].columns
+metadata.tables['tabla_personas'].columns.keys()
+metadata.tables['tabla_personas'].columns.values
 
 # Crear la tabla (vacía) en la base de datos usando el engine
 metadata.create_all(engine)
@@ -81,7 +91,7 @@ session = Session()
 # da error porque dni ha de ser único
 nuevo_registro = Tabla_Personas(nombre='Juan', apellido1='López', dni='12345678F')
 # Puedo ver el contenido del registro.
-# El id no está definido hasta que se añade a la base de datos
+# El id no está definido hasta que se añade el registro a la base de datos
 nuevo_registro.id
 # Tampoco date_created
 nuevo_registro.date_created
@@ -101,7 +111,6 @@ session.add(nuevo_registro)
 session.commit()
 
 # Ejemplo de cómo consultar todos los registros de la base de datos
-
 registros = session.query(Tabla_Personas).all()
 registros[0].apellido1
 

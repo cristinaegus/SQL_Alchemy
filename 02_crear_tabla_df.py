@@ -1,23 +1,19 @@
 from sqlalchemy import create_engine
 
-# Información de la base de datos
-db_management_sys = "postgresql"
-db_name = "postgres"
-db_user = "postgres"
-# Esto puede variar según la configuración de tu proveedor
-db_password = "Qzd0MtdWrULeulfQ"
-db_host = "heinously-engrossed-sabertooth.data-1.use1.tembo.io"
-
-# URL de conexión a la base de datos PostgreSQL en Tembo.io
-db_url = f"{db_management_sys}://{db_user}:{db_password}@{db_host}/{db_name}"
-
-#db_url = 'sqlite:///ejemplo.db'
-# Crear una instancia de motor (engine)
-# engine = create_engine(db_url)
+# URL de conexión a la base de datos PostgreSQL en el archivo .env
+import environ
+env = environ.Env()
+env.read_env(".env")
+db_url = env("db_url")
+print("Comprobamos que ha tomado el valor de la variable de entorno:", db_url)
 
 # Si se quiere usar SQLite en lugar de la base remota:
-engine = create_engine('sqlite:///ejemplo.db')
+db_url = 'sqlite:///ejemplo.db'
 
+
+
+# Crear una instancia de motor (engine)
+engine = create_engine(db_url)
 
 # Vamos a subir un DataFrame de Pandas a la Base de datos
 import pandas as pd
@@ -34,11 +30,9 @@ df = pd.DataFrame(data)
 # ...o bien abrir un archivo csv (u obtener un dataframe pandas por cualquier otro método)
 # y cargarlo en la base de datos
 
-#df = pd.read_csv("/home/laptop/Proyectos Python/Numpy_pandas/datos/" + "adult.csv", sep = ",")
-
-
-# Nombre de la tabla que deseas crear
-nombre_tabla = 'tabla2'
+df = pd.read_csv("../Ligas/resultados_24-25/" + "laliga_24-25.csv", sep = ",")
+print(df)
+print(df.info())
 
 
 # Utilizar to_sql para crear la tabla en la base de datos
@@ -48,6 +42,8 @@ base de datos PostgreSQL.
 index=False evita que se escriba el índice de Pandas como una columna separada en la tabla.
 if_exists='replace' indica que, si la tabla ya existe, se reemplazará.
 """
+# Nombre de la tabla que deseas crear
+nombre_tabla = 'tabla2'
 try:
     df.to_sql(nombre_tabla, engine, index=False, if_exists = 'replace')
     print(f"Tabla '{nombre_tabla}' creada exitosamente en la base de datos.")
@@ -55,7 +51,7 @@ try:
 except Exception as e:
     print(f"Error al crear la tabla: {e}")
 
-tabla_extraida = pd.read_sql_table("tabla2", engine)
+tabla_extraida = pd.read_sql_table(nombre_tabla, engine)
 print(tabla_extraida)
 
 # Para ver los datos almacenados podemos ejecutar esta 

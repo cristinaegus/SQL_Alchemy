@@ -5,7 +5,6 @@ que almacena los datos en el archivo ejemplo.db
 from sqlalchemy import create_engine
 
 # Definir la URL de conexión a la base de datos
-# Este es un ejemplo para SQLite, pero debes ajustarla según tu base de datos
 # SQLite crea la base de datos en un archivo local
 db_url = 'sqlite:///ejemplo.db'
 
