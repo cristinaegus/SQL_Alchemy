@@ -1,8 +1,9 @@
 .env
-__pycache__
+__pycache__/*
 sql_alchemy
 ejemplo.db
 venv
 prueba.js
-playground*.*
 sql.py
+.gitignore
+playground*.*

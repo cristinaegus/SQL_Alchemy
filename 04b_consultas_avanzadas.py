@@ -4,14 +4,16 @@ from sqlalchemy.orm import declarative_base, Session
 ###########################################################
 # Uso de operadores de comparación en consultas avanzadas
 ###########################################################
-
-# Crear el motor y la sesión
 import environ
 env = environ.Env()
 env.read_env(".env")
+db_url = env("db_url")
+
+# URL de conexión a la base de datos SQLite (puedes cambiarlo a tu configuración PostgreSQL)
+db_url = 'sqlite:///ejemplo.db'
 
 # Crear una instancia de motor (engine)
-engine = create_engine(env("db_url_remota"), echo=True)
+engine = create_engine(db_url)
 
 metadata = MetaData()
 Base = declarative_base(metadata = metadata)
@@ -41,7 +43,7 @@ session.query(Producto).all()
 
 
 # Ejemplo 1: Productos con un precio mayor a 400
-resultados_precio_mayor_400 = session.query(Producto).filter(Producto.precio > 400 ).all()
+resultados_precio_mayor_400 = session.query(Producto).filter(Producto.precio > 400).all()
 
 
 print("\nProductos con precio mayor a 400:")

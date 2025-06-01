@@ -12,7 +12,11 @@ from modelos_1_a_1 import Personas, Direcciones
 import environ
 env = environ.Env()
 
-engine = create_engine("postgresql://postgres:gADN0XF1bH27yOfc@fussily-touching-troll.data-1.use1.tembo.io:5432/postgres")
+# URL de conexión a la base de datos SQLite (puedes cambiarlo a tu configuración PostgreSQL)
+db_url = 'sqlite:///ejemplo.db'
+
+# Crear una instancia de motor (engine)
+engine = create_engine(db_url)
 ################################
 # Creación del modelo de datos #
 ################################

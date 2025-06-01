@@ -8,8 +8,11 @@ import environ
 env = environ.Env()
 env.read_env(".env")
 
+# URL de conexión a la base de datos SQLite (puedes cambiarlo a tu configuración PostgreSQL)
+db_url = 'sqlite:///ejemplo.db'
+
 # Crear una instancia de motor (engine)
-engine = create_engine(env("db_url_local"))
+engine = create_engine(db_url)
 
 ################################
 # Creación del modelo de datos #
