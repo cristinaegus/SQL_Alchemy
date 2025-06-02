@@ -75,3 +75,18 @@ class GestorBiblioteca:
 
     def listar_prestamos(self):
         return self.session.query(PrestamoDB).all()
+
+
+    def info_usuario(self, id_usuario):
+        usuario = self.session.query(UsuarioDB).filter_by(id_usuario=id_usuario).first()
+        if not usuario:
+            return None
+        if usuario.prestamos:
+            prestamos = [(prestamo.id_material, prestamo.material.titulo, prestamo.fecha_devolucion) for prestamo in usuario.prestamos]
+        else:
+            prestamos = []
+        return {
+            "nombre": usuario.nombre,
+            "apellido": usuario.apellido,
+            "prestamos": prestamos
+        }

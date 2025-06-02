@@ -14,6 +14,7 @@ def menu():
         print("6. Listar usuarios")
         print("7. Agregar préstamo")
         print("8. Listar préstamos")
+        print("9. Información de usuario")
         print("q. Salir")
 
         opcion = input("Seleccione una opción: ")
@@ -72,6 +73,16 @@ def menu():
         elif opcion == "8":
             for p in app.listar_prestamos():
                 print(f"Usuario: {p.id_usuario} - Material: {p.id_material} - Devuelve el {p.fecha_devolucion.date()}")
+        elif opcion == "9":
+            id_usuario = input("ID del usuario: ")
+            info = app.info_usuario(id_usuario)
+            if info:
+                print(f"Nombre: {info['nombre']} {info['apellido']}")
+                print("Préstamos:")
+                for p in info['prestamos']:
+                    print(f"  - {p}")
+            else:
+                print("Usuario no encontrado.")
         elif opcion == "q":
             break
         else:
