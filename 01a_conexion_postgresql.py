@@ -10,6 +10,7 @@ import environ
 env = environ.Env()
 env.read_env(".env")
 db_url = env("db_url")
+
 print("Comprobamos que ha tomado el valor de la variable de entorno:", db_url)
 
 # Crear una instancia de motor (engine)

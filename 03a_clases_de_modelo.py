@@ -46,7 +46,7 @@ Base = declarative_base(metadata = metadata)
 class Tabla_Personas(Base):
     __tablename__ = 'tabla_personas'
 
-    id = Column(Integer, primary_key=True, autoincrement=True, )
+    id = Column(Integer, primary_key=True, autoincrement=True)
     nombre = Column(String(30), nullable=False)
     apellido1 = Column(String(30), nullable=False)
     apellido2 = Column(String(30), nullable=True)
@@ -76,7 +76,7 @@ print(metadata.tables)
 metadata.tables['tabla_personas']
 metadata.tables['tabla_personas'].columns
 metadata.tables['tabla_personas'].columns.keys()
-metadata.tables['tabla_personas'].columns.values
+metadata.tables['tabla_personas'].columns.values()
 
 # Crear la tabla (vacía) en la base de datos usando el engine
 metadata.create_all(engine)
@@ -112,7 +112,7 @@ session.commit()
 
 # Ejemplo de cómo consultar todos los registros de la base de datos
 registros = session.query(Tabla_Personas).all()
-registros[0].apellido1
+registros[1].nombre
 
 
 def imprime_todo(Clase_Modelo):

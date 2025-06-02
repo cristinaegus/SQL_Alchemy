@@ -54,6 +54,7 @@ except Exception as e:
 # Comprobamos lo añadido
 for persona in session.query(Personas).all():
     print(persona.id, persona.dni)
+    print(persona)
     
 try:
     nueva_direccion_1 = Direcciones(calle='Correos', numero=10, ciudad='Madrid', persona_id= 2)

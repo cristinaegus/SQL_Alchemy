@@ -26,7 +26,7 @@ las necesidades específicas de tu tabla y datos.
 
 data = {'columna1': [1, 2, 3], 'columna2': ['A', 'B', 'C']}
 df = pd.DataFrame(data)
-
+print(df)
 # ...o bien abrir un archivo csv (u obtener un dataframe pandas por cualquier otro método)
 # y cargarlo en la base de datos
 
