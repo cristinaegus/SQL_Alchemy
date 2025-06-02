@@ -15,7 +15,7 @@ print("Comprobamos que ha tomado el valor de la variable de entorno:", db_url)
 # Crear una instancia de motor (engine)
 engine = create_engine(db_url)
 
-
+# Esto por si lo tienes que hacer manualmente por trozos
 # El string de conexión es una URL que contiene la información necesaria para conectarnos a la base de datos
 # Puede que nos proporcionen el string completo o por partes
 # Si nos lo dan completo, tendrá este formato, pero con los datos correspondientes a nuestra base de datos
