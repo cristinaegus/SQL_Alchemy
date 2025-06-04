@@ -1,5 +1,4 @@
 # modelos.py
-# modelos.py
 from sqlalchemy import Column, String, Integer, DateTime, Boolean, ForeignKey
 from sqlalchemy.orm import declarative_base, relationship
 import uuid
@@ -50,3 +49,4 @@ if __name__ == "__main__":
     Base.metadata.drop_all(engine) # Eliminar las tablas si ya existen
     Base.metadata.create_all(engine)
     print("Tablas creadas")
+   
